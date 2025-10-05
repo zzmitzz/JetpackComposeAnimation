@@ -1,4 +1,4 @@
-package com.turing.googlenano.animation
+package com.turing.animation.animation
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -22,8 +22,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.turing.googlenano.R
+import com.turing.animation.R
 
 // @Credit: Anatolii Frolov
 
@@ -31,6 +32,10 @@ import com.turing.googlenano.R
 fun PulseAnimationImage(
     modifier: Modifier = Modifier,
     @DrawableRes icon: Int,
+    circleColor: Color = Color.Green,
+    ringColor: Color = Color.Green.copy(alpha = 0.9f),
+    ringWidth: Dp = 1.5.dp,
+    animationSpeed: Float = 1f
 ) {
     val periodMs = 3600L
     val offsetsMs = longArrayOf(0L, 1200L, 2400L)
@@ -61,7 +66,7 @@ fun PulseAnimationImage(
                     scaleY = 1f + 0.8f * p
                     alpha = 1f - p
                 }
-                .border(1.5.dp, Color.Green.copy(alpha = 0.9f), CircleShape)
+                .border(ringWidth, ringColor, CircleShape)
         )
 
         Ring(phase(offsetsMs[0]))
@@ -71,7 +76,7 @@ fun PulseAnimationImage(
         Box(
             Modifier
                 .size(80.dp)
-                .background(Color.Green, CircleShape),
+                .background(circleColor, CircleShape),
             contentAlignment = Alignment.Center
         ) {
             Image(
@@ -87,6 +92,6 @@ fun PulseAnimationImage(
 @Composable
 fun PreviewPulseAnimationImage() {
     PulseAnimationImage(
-        icon = R.drawable.logo_mitg,
+        icon = R.drawable.logo_mitz,
     )
 }
